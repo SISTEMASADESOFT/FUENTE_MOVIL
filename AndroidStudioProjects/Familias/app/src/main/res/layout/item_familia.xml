@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/fam_border"
+    app:cardBackgroundColor="@color/fam_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+
+
+        <TextView
+            android:id="@+id/viewAccent"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_avatar_circle"
+            android:gravity="center"
+            android:text="F"
+            android:textColor="@color/fam_gold"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:id="@+id/txtDscFamilia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="BEBIDAS"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/fam_ink" />
+
+            <TextView
+                android:id="@+id/txtCodFamilia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textAllCaps="true"
+                android:text="Código 00001"
+                android:textSize="12sp"
+                android:textColor="@color/fam_ink_faint" />
+
+        </LinearLayout>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACTIVO"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:chipMinHeight="24dp"
+                app:chipBackgroundColor="@color/fam_success_bg"
+                android:textColor="@color/fam_success"
+                app:chipStrokeWidth="0dp" />
+
+                </LinearLayout>
+
+
+
+
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/fam_border" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditar"
+
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Editar"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:cornerRadius="10dp"
+                app:strokeColor="@color/fam_border"
+                app:strokeWidth="1dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="@color/fam_ink" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminar"
+
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="Eliminar"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:cornerRadius="10dp"
+                app:backgroundTint="@color/fam_danger_bg"
+                android:textColor="@color/fam_danger" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

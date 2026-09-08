@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fam_bg">#FAF7F2</color>
+    <color name="fam_surface">#FFFFFF</color>
+    <color name="fam_ink">#14213D</color>
+    <color name="fam_ink_soft">#5B6178</color>
+    <color name="fam_ink_faint">#A6A8B8</color>
+    <color name="fam_gold">#B08D57</color>
+    <color name="fam_gold_soft">#F1E9D8</color>
+    <color name="fam_border">#EAE4D6</color>
+    <color name="fam_danger">#B5433E</color>
+    <color name="fam_danger_bg">#F7EAE9</color>
+    <color name="fam_success_bg">#EEF2EA</color>
+    <color name="fam_success">#5C7A54</color>
+</resources>

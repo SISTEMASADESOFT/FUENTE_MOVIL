@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/fam_surface"
+    android:padding="26dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DESCRIPCIÓN"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
+        android:textColor="@color/fam_ink_faint" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtDscFamilia"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_search_pill"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/fam_ink"
+            android:textColorHint="@color/fam_ink_faint"
+            android:textSize="15sp"
+            android:inputType="text" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="11sp"
+        android:text="ESTADO"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
+        android:textColor="@color/fam_ink_faint"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_search_pill">
+
+
+    <Spinner
+        android:id="@+id/spEstado"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="12dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

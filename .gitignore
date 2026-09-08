@@ -1,0 +1,40 @@
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android Studio
+.idea/
+*.iml
+
+# Configuración local
+local.properties
+
+# Archivos generados
+captures/
+.externalNativeBuild/
+.cxx/
+
+# APKs generados
+*.apk
+*.aab
+
+# Logs
+*.log
+
+# Caché
+*.tmp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de usuario de Android Studio
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/shelf/
+
+# Claves y archivos sensibles
+*.jks
+*.keystore
