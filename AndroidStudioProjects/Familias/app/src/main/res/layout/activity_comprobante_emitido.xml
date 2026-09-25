@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fam_bg">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/fam_bg"
+        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:navigationIconTint="@color/fam_ink"
+        app:title="Comprobante Emitido"
+        app:titleTextColor="@color/fam_ink" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <!-- Icono de exito -->
+            <LinearLayout
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_icon_circle_success">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@android:drawable/checkbox_on_background"
+                    app:tint="@color/fam_success" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtTituloExito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="¡Cotización emitida correctamente!"
+                android:textColor="@color/fam_ink"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/txtSerieNumeroExito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="F001 - 0000123"
+                android:textColor="@color/fam_ink"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/txtSubtituloExito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Se ha guardado correctamente."
+                android:textColor="@color/fam_ink_soft"
+                android:textSize="13sp"
+                android:gravity="center" />
+
+            <!-- Botones -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerPdf"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="28dp"
+                android:text="Ver PDF"
+                android:textStyle="bold"
+                app:icon="@android:drawable/ic_menu_agenda"
+                app:iconTint="@color/fam_gold"
+                app:cornerRadius="12dp"
+                app:backgroundTint="@color/fam_ink"
+                app:rippleColor="@color/fam_gold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEnviarCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:text="Enviar por correo"
+                android:textColor="@color/fam_ink"
+                app:icon="@android:drawable/ic_dialog_email"
+                app:iconTint="@color/fam_gold"
+                app:cornerRadius="12dp"
+                android:visibility="gone"
+                app:strokeColor="@color/fam_border"
+                app:strokeWidth="1dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEnviarWhatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                android:text="Enviar por WhatsApp"
+                android:textColor="@color/fam_success"
+                app:icon="@android:drawable/ic_menu_send"
+                app:iconTint="@color/fam_success"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/fam_success"
+                app:strokeWidth="1dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <TextView
+                android:id="@+id/txtNuevoComprobante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:padding="8dp"
+                android:text="+ Nuevo comprobante"
+                android:textColor="@color/fam_gold"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtFechaAceptacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text=""
+                android:textColor="@color/fam_ink_faint"
+                android:textSize="11sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package com.maestros.familias.data.api
+    package com.maestros.familias.data.api
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,4 +45,86 @@ object RetrofitClient {
             .build()
             .create(MenuApiService::class.java)
     }
+
+    val clienteApi: ClienteApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ClienteApiService::class.java)
+    }
+
+    val productoApi: ProductoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ProductoApiService::class.java)
+    }
+
+    val correlativoApi: CorrelativoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CorrelativoApiService::class.java)
+    }
+
+    val tipoCambioApi: TipoCambioApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(TipoCambioApiService::class.java)
+    }
+
+    val formaPagoApi: FormaPagoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(FormaPagoApiService::class.java)
+    }
+
+    val cotizacionApi: CotizacionApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CotizacionApiService::class.java)
+    }
+
+    val empleadoApi: EmpleadoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(EmpleadoApiService::class.java)
+    }
+
+    val imagenApi: ImagenApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ImagenApiService::class.java)
+    }
+
+    val comprobanteApi: ComprobanteApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ComprobanteApiService::class.java)
+    }
+
 }

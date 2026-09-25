@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:padding="14dp"
+    android:background="@drawable/bg_card_surface">
+
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@android:drawable/ic_menu_agenda"
+        app:tint="@color/fam_gold"
+        xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNumeroComp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="F001-0000123"
+            android:textColor="@color/fam_ink"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/txtClienteComp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="EMPRESA EJEMPLO SAC"
+            android:textColor="@color/fam_ink_soft"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/txtFechaComp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="09/09/2025"
+            android:textColor="@color/fam_ink_faint"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/txtMontoComp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S/ 830.00"
+            android:textColor="@color/fam_ink"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtEstadoComp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            android:text="EMITIDA"
+            android:textColor="@color/fam_gold"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:background="@drawable/bg_badge_estado" />
+    </LinearLayout>
+</LinearLayout>

@@ -15,9 +15,12 @@ import com.google.android.material.textfield.TextInputEditText
 import com.maestros.familias.MainActivity
 import com.maestros.familias.R
 import com.maestros.familias.data.api.RetrofitClient
+import com.maestros.familias.data.model.CodUsuarioRequest
 import com.maestros.familias.data.model.Usuario
 import com.maestros.familias.data.repository.LoginRepository
+import com.maestros.familias.data.session.SessionManager
 import kotlinx.coroutines.launch
+import com.maestros.familias.ui.ventas.InicioVentasActivity
 
 class LoginActivity: AppCompatActivity() {
     private lateinit var txtUsuario: TextInputEditText
@@ -33,6 +36,7 @@ class LoginActivity: AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?){
+        SessionManager.init(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -78,11 +82,36 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
-        lifecycleScope.launch{
-            viewModel.usuarioLogueado.collect{ usuario ->
-                if(usuario !=null){
+        lifecycleScope.launch {
+            viewModel.usuarioLogueado.collect { usuario ->
+                if (usuario != null) {
+
+                    val codAlmacenReal = codigosAlmacen.getOrNull(spAlmacen.selectedItemPosition)
+
+                    if (codAlmacenReal == null) {
+                        Toast.makeText(this@LoginActivity, "Error: no se pudo determinar el almacén. Vuelve a intentar.", Toast.LENGTH_LONG).show()
+                        return@collect
+                    }
+
+                    SessionManager.guardarSesion(
+                        codUsuario = usuario.codUsuario,
+                        codEmpresa = usuario.codEmpresa,
+                        codAlmacen = codAlmacenReal,
+                        nombreUsuario = usuario.nombre,
+                        perfil = usuario.perfil
+                    )
+
+                    lifecycleScope.launch {
+                        try{
+                            val codEmpleado = RetrofitClient.empleadoApi
+                                .obtenerCodEmpleado(CodUsuarioRequest(usuario.codUsuario)).d
+                            SessionManager.guardarCodEmpleado(codEmpleado.toIntOrNull()?: 0)
+                        }catch(e: Exception){
+                            Toast.makeText(this@LoginActivity, "Advertencia: no se pudo obtener el código de empleado", Toast.LENGTH_LONG).show()
+                        }
+                    }
                     Toast.makeText(this@LoginActivity, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    startActivity(Intent(this@LoginActivity, InicioVentasActivity::class.java))
                     finish()
                 }
             }
