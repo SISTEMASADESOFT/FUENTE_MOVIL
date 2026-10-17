@@ -13,6 +13,7 @@ import com.maestros.familias.R
 import com.maestros.familias.data.api.RetrofitClient
 import com.maestros.familias.data.repository.CotizacionRepository
 import com.maestros.familias.data.session.CotizacionEnCurso
+import com.maestros.familias.data.session.Documentos
 import com.maestros.familias.data.session.SessionManager
 import com.maestros.familias.data.util.CotizacionFormatter
 import kotlinx.coroutines.launch
@@ -38,6 +39,19 @@ class ComprobanteEmitidoActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.txtSerieNumeroExito).text =
             "${CotizacionEnCurso.serie} - ${CotizacionEnCurso.numero}"
+
+        val config = Documentos.porTipo(CotizacionEnCurso.tipoDoc)
+        findViewById<TextView>(R.id.txtTituloExito).text = "¡${config.nombre} emitida correctamente!"
+        if (config.esVenta) {
+
+            findViewById<MaterialButton>(R.id.btnVerPdf).visibility = android.view.View.GONE
+            findViewById<MaterialButton>(R.id.btnConsultaCotizaciones).visibility = android.view.View.GONE
+        }
+
+        if (config.esVenta && CotizacionEnCurso.guiaEmitida.isNotBlank()) {
+            findViewById<TextView>(R.id.txtSubtituloExito).text =
+                "Incluye la guía de remisión ${CotizacionEnCurso.guiaEmitida}"
+        }
 
         val sdf = SimpleDateFormat("dd/MM/yyyy - hh:mm a", Locale("es", "PE"))
         findViewById<TextView>(R.id.txtFechaAceptacion).text = "Guardado el ${sdf.format(Date())}"
@@ -76,6 +90,13 @@ class ComprobanteEmitidoActivity : AppCompatActivity() {
                 }
             }
         }
+
+        findViewById<MaterialButton>(R.id.btnConsultaCotizaciones).setOnClickListener {
+            CotizacionEnCurso.limpiar()
+            startActivity(Intent(this, ComprobantesActivity::class.java))
+            finish()
+        }
+
         findViewById<MaterialButton>(R.id.btnEnviarCorreo).setOnClickListener {
             val texto = CotizacionFormatter.generarCuerpoCorreo()+ CotizacionFormatter.asuntoCorreo()
             val cliente = CotizacionEnCurso.cliente

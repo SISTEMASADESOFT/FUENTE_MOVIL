@@ -13,7 +13,7 @@
         android:background="@color/fam_bg"
         app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
         app:navigationIconTint="@color/fam_ink"
-        app:title="Comprobantes"
+        app:title="Consulta Cotizaciones"
         app:titleTextColor="@color/fam_ink" />
 
     <LinearLayout
@@ -23,6 +23,47 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Filtro de fecha por rango -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp">
+
+            <CheckBox
+                android:id="@+id/chkFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="FECHA"
+                android:textColor="@color/fam_ink"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:buttonTint="@color/fam_gold" />
+
+            <TextView
+                android:id="@+id/txtDesde"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_search_pill"
+                android:gravity="center"
+                android:textColor="@color/fam_ink"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtHasta"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_search_pill"
+                android:gravity="center"
+                android:textColor="@color/fam_ink"
+                android:textSize="13sp" />
+        </LinearLayout>
         <!-- Buscador -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,36 +94,16 @@
                 android:singleLine="true" />
         </LinearLayout>
 
-        <!-- Tabs -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabsComprobantes"
+
+
+
+        <TextView
+            android:id="@+id/txtContadorComp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:tabMode="scrollable"
-            app:tabIndicatorColor="@color/fam_gold"
-            app:tabSelectedTextColor="@color/fam_ink"
-            app:tabTextColor="@color/fam_ink_soft"
-            app:tabRippleColor="@color/fam_gold_soft"
-            android:background="@android:color/transparent">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Todos" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Facturas" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Boletas" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cotizaciones" />
-        </com.google.android.material.tabs.TabLayout>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/fam_ink_soft"
+            android:textSize="12sp" />
 
         <ProgressBar
             android:id="@+id/progressComprobantes"
@@ -90,24 +111,31 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:indeterminateTint="@color/fam_gold" />
+            android:indeterminateTint="@color/fam_gold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/txtSinComprobantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="No se encontraron comprobantes"
-            android:textColor="@color/fam_ink_soft"
             android:gravity="center"
+            android:textColor="@color/fam_ink_soft"
             android:visibility="gone" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvComprobantes"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeComprobantes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:clipToPadding="false" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="6dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvComprobantes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

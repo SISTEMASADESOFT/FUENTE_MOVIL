@@ -88,14 +88,34 @@ class InicioVentasActivity : AppCompatActivity() {
         rvAccesosRapidos.layoutManager = GridLayoutManager(this, 3)
         rvAccesosRapidos.adapter = AccesoRapidoAdapter(accesos) { label ->
             when (label) {
+
+                "Nueva Factura" -> {
+                    CotizacionEnCurso.limpiar()
+                    startActivity(
+                        Intent(this, NuevaCotizacionActivity::class.java)
+                            .putExtra("TIPO_DOC", 1)
+                    )
+                }
+
                 "Cotización" -> {
                     CotizacionEnCurso.limpiar()
-                startActivity(Intent(this, NuevaCotizacionActivity::class.java))
-            }
-                "Comprobantes" ->
+                    startActivity(
+                        Intent(this, NuevaCotizacionActivity::class.java)
+                            .putExtra("TIPO_DOC", 15)
+                    )
+                }
+
+                "Comprobantes" -> {
                     startActivity(Intent(this, ComprobantesActivity::class.java))
-                else -> Toast.makeText(this,
-                    "Próximamente: $label", Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+                    Toast.makeText(
+                        this,
+                        "Próximamente: $label",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

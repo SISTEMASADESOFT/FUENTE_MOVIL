@@ -127,4 +127,22 @@ object RetrofitClient {
             .create(ComprobanteApiService::class.java)
     }
 
+    val imeiApi: ImeiApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ImeiApiService::class.java)
+    }
+
+    val documentoApi: DocumentoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(DocumentoApiService::class.java)
+    }
+
 }

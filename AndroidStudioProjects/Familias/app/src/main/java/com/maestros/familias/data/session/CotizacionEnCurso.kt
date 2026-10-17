@@ -21,6 +21,29 @@ object CotizacionEnCurso {
     var formaPago: String = ""
     val productos: MutableList<ProductoSeleccionado> = mutableListOf()
 
+    var direccionEtiqueta: String = ""
+
+    var codProformaEdicion: Int = 0
+    var codEmpleado: Int = 0
+    var placa: String = ""
+    var km: String = ""
+    var observacion: String = ""
+    var atencion: String = ""
+    var referencia: String = ""
+    var nroOperacion: String = ""
+    var flagComisionable: Int = 0
+    var flagConCodigo: Int = 0
+
+    var fechaVencimiento: String = ""
+
+    var guiaEmitida: String = ""
+
+
+    //factura
+    var tipoDoc: Int = 15   // 15 = cotización, 1 = factura
+    val esFactura: Boolean get() = tipoDoc == 1
+    val esEdicion: Boolean get() = codProformaEdicion > 0
+
     fun limpiar() {
         cliente = null
         serie = ""
@@ -32,7 +55,22 @@ object CotizacionEnCurso {
         codFormaPago = ""
         codTasa = ""
         formaPago = ""
-
+        direccionEtiqueta = ""
         productos.clear()
+
+
+        codProformaEdicion = 0
+        codEmpleado = 0
+        placa = ""
+        km = ""
+        observacion = ""
+        atencion = ""
+        referencia = ""
+        nroOperacion = ""
+        flagComisionable = 0
+        flagConCodigo = 0
+        tipoDoc = 15
+        fechaVencimiento = ""
+        guiaEmitida = ""
     }
 }

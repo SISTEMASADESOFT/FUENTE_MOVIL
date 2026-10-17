@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/btnQuitarDir"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Quitar dirección"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:tint="@color/fam_danger" />
+
+    <ImageButton
+        android:id="@+id/btnEditarDir"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Editar dirección"
+        android:src="@android:drawable/ic_menu_edit"
+        app:tint="@color/fam_gold" />
+
+    <TextView
+        android:id="@+id/txtFilaDireccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="6dp"
+        android:textColor="@color/fam_ink"
+        android:textSize="13sp" />
+</LinearLayout>

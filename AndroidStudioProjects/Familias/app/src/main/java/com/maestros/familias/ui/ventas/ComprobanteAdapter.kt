@@ -1,5 +1,7 @@
 package com.maestros.familias.ui.ventas
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,10 +34,27 @@ class ComprobanteAdapter(
         holder.txtNumero.text = item.numero
         holder.txtCliente.text = item.cliente
         holder.txtFecha.text = item.fechaEmision
-        val simbolo = if (item.moneda.contains("2") || item.moneda.contains("DOL", true)) "US$" else "S/"
+        val simbolo = if (item.moneda.contains("2") || item.moneda.contains("DOL", true)) "\$" else "S/"
         holder.txtMonto.text = "$simbolo ${item.total}"
         holder.txtEstado.text = item.estado
+        aplicarColorEstado(holder.txtEstado, item.estado)
         holder.itemView.setOnClickListener { onClick(item) }
+    }
+
+    private fun aplicarColorEstado(tv: TextView, estado: String) {
+        val (texto, fondo) = when {
+            estado.contains("ANUL", true) -> Pair("#B23A3A", "#F8E4E4")
+            estado.contains("FACT", true) ||
+                    estado.contains("APROB", true) -> Pair("#2E7D4F", "#E3F2E9")
+            else -> Pair("#B08D57", "#F5EDDF")
+        }
+        val d = tv.resources.displayMetrics.density
+        tv.setTextColor(Color.parseColor(texto))
+        tv.background = GradientDrawable().apply {
+            cornerRadius = 20f * d
+            setColor(Color.parseColor(fondo))
+        }
+        tv.setPadding((10 * d).toInt(), (4 * d).toInt(), (10 * d).toInt(), (4 * d).toInt())
     }
 
     override fun getItemCount() = items.size

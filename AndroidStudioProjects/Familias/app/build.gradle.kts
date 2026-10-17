@@ -43,7 +43,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.recyclerview)
     implementation(libs.cardview)
-
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)

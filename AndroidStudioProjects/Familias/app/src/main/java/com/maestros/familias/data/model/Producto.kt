@@ -14,8 +14,12 @@ data class ProductoSeleccionado(
     val producto: Producto,
     var cantidad: Int,
     var descripcion: String = producto.descripcion,
-    var precioUnitario: BigDecimal = producto.precio
+    var precioUnitario: BigDecimal = producto.precio,
+
+    var precioBase: BigDecimal=precioUnitario,
+    var monedaBase: Int=0
 ) {
     val subtotal: BigDecimal
         get() = precioUnitario.multiply(BigDecimal(cantidad))
+            .setScale(2, java.math.RoundingMode.HALF_UP)
 }

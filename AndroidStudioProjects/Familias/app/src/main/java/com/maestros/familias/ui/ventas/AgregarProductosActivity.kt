@@ -24,72 +24,71 @@ import com.maestros.familias.data.repository.ProductoRepository
 import com.maestros.familias.data.repository.TipoCambioRepository
 import com.maestros.familias.data.session.CotizacionEnCurso
 import com.maestros.familias.data.session.SessionManager
+import com.maestros.familias.data.util.CampoError
 import com.maestros.familias.data.util.MonedaHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
-import java.text.NumberFormat
-import java.util.Locale
 
 class AgregarProductosActivity : AppCompatActivity() {
 
-    private val productoRepository = ProductoRepository(RetrofitClient.productoApi)
-    private var jobBusqueda: Job? = null
+            private val productoRepository = ProductoRepository(RetrofitClient.productoApi)
+            private var jobBusqueda: Job? = null
 
-    private var igvPorcentaje = BigDecimal.ZERO
+            private var igvPorcentaje = BigDecimal.ZERO
 
-    private var resultadosCompletos: List<Producto> = emptyList()
-    private var paginaActual = 0
-    private val itemsPorPagina = 6
+            private var resultadosCompletos: List<Producto> = emptyList()
+            private var paginaActual = 0
+            private val itemsPorPagina = 6
 
-    private val seleccionados = mutableListOf<ProductoSeleccionado>().apply {
-        addAll(CotizacionEnCurso.productos)
-    }
-
-    private lateinit var adapterDisponibles: ProductoDisponibleAdapter
-    private lateinit var adapterSeleccionados: ProductoSeleccionadoAdapter
-
-
-
-
-    private fun getCodAlmacen(): String = SessionManager.getCodAlmacen().toString()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agregar_productos)
-
-        findViewById<MaterialToolbar>(R.id.toolbar).setNavigationOnClickListener {
-            cancelarCotizacion()
-        }
-
-        val rvDisponibles = findViewById<RecyclerView>(R.id.rvProductosDisponibles)
-        val rvSeleccionados = findViewById<RecyclerView>(R.id.rvProductosSeleccionados)
-
-        adapterDisponibles = ProductoDisponibleAdapter(
-            emptyList(),
-            CotizacionEnCurso.codMoneda,
-             onAgregar = { producto -> mostrarDialogoProducto(producto)},
-            onVerImagen = { producto -> mostrarImagenesProducto(producto)}
-        )
-
-        adapterSeleccionados = ProductoSeleccionadoAdapter(
-            emptyList(),
-            CotizacionEnCurso.codMoneda,
-            onEliminar = { seleccionado ->
-                confirmarEliminarProducto(seleccionado)
-            },
-            onEditar = { seleccionado ->
-                mostrarDialogoProducto(seleccionado.producto, seleccionado)
+            private val seleccionados = mutableListOf<ProductoSeleccionado>().apply {
+                addAll(CotizacionEnCurso.productos)
             }
-        )
+
+            private lateinit var adapterDisponibles: ProductoDisponibleAdapter
+            private lateinit var adapterSeleccionados: ProductoSeleccionadoAdapter
 
 
-        rvDisponibles.layoutManager = LinearLayoutManager(this)
-        rvDisponibles.adapter = adapterDisponibles
 
-        rvSeleccionados.layoutManager = LinearLayoutManager(this)
-        rvSeleccionados.adapter = adapterSeleccionados
+
+            private fun getCodAlmacen(): String = SessionManager.getCodAlmacen().toString()
+
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+                setContentView(R.layout.activity_agregar_productos)
+
+                findViewById<MaterialToolbar>(R.id.toolbar).setNavigationOnClickListener {
+                    cancelarCotizacion()
+                }
+
+                val rvDisponibles = findViewById<RecyclerView>(R.id.rvProductosDisponibles)
+                val rvSeleccionados = findViewById<RecyclerView>(R.id.rvProductosSeleccionados)
+
+                adapterDisponibles = ProductoDisponibleAdapter(
+                    emptyList(),
+                    CotizacionEnCurso.codMoneda,
+                    onAgregar = { producto -> mostrarDialogoProducto(producto)},
+                    onVerImagen = { producto -> mostrarImagenesProducto(producto)}
+                )
+
+                adapterSeleccionados = ProductoSeleccionadoAdapter(
+                    emptyList(),
+                    CotizacionEnCurso.codMoneda,
+                    onEliminar = { seleccionado ->
+                        confirmarEliminarProducto(seleccionado)
+                    },
+                    onEditar = { seleccionado ->
+                        mostrarDialogoProducto(seleccionado.producto, seleccionado)
+                    }
+                )
+
+
+                rvDisponibles.layoutManager = LinearLayoutManager(this)
+                rvDisponibles.adapter = adapterDisponibles
+
+                rvSeleccionados.layoutManager = LinearLayoutManager(this)
+                rvSeleccionados.adapter = adapterSeleccionados
 
         val txtBuscar = findViewById<TextInputEditText>(R.id.txtBuscarProducto)
         txtBuscar.addTextChangedListener(object : TextWatcher {
@@ -142,15 +141,18 @@ class AgregarProductosActivity : AppCompatActivity() {
         }
 
         findViewById<MaterialButton>(R.id.btnAtras).setOnClickListener { finish() }
+
+
         findViewById<MaterialButton>(R.id.btnSiguientePaso).setOnClickListener {
+            CampoError.limpiar(txtBuscar)
+
             if (seleccionados.isEmpty()) {
-                Toast.makeText(this, "Agrega al menos un producto",
-                    Toast.LENGTH_SHORT)
-                    .show()
+                CampoError.mostrar(txtBuscar, "AGREGA AL MENOS UN PRODUCTO")
+
                 return@setOnClickListener
             }
             if (igvPorcentaje <= BigDecimal.ZERO){
-                Toast.makeText(this, "No se pudo cargar el IGV",
+                Toast.makeText(this, "NO SE PUDO CARGAR EL IGV",
                     Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
@@ -158,7 +160,7 @@ class AgregarProductosActivity : AppCompatActivity() {
             CotizacionEnCurso.productos.clear()
             CotizacionEnCurso.productos.addAll(seleccionados)
             CotizacionEnCurso.igvPorcentaje = igvPorcentaje
-            startActivity(android.content.Intent(this,
+            startActivity(  Intent(this,
                 ConfirmarEmitirActivity::class.java))
         }
 
@@ -274,25 +276,55 @@ class AgregarProductosActivity : AppCompatActivity() {
         val txtCantidad = dialogView.findViewById<TextInputEditText>(R.id.txtCantidadDialog)
 
         txtDescripcion.setText(existente?.descripcion ?: producto.descripcion)
-        txtPrecio.setText((existente?.precioUnitario ?: producto.precio).toPlainString())
+        txtPrecio.setText((existente?.precioUnitario ?: producto.precio)
+            .setScale(2, java.math.RoundingMode.HALF_UP).toPlainString())
         txtCantidad.setText((existente?.cantidad ?: 1).toString())
 
-        AlertDialog.Builder(this)
-            .setTitle(if (existente == null) "Agregar producto" else "Editar producto")
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(if(existente == null) "Agregar producto" else "Editar producto")
             .setView(dialogView)
-            .setPositiveButton(if (existente == null) "Agregar" else "Guardar") { _, _ ->
+            .setPositiveButton(if(existente == null) "Agregar" else "Guardar", null)
+            .setNegativeButton("Cancelar", null)
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                CampoError.limpiar(txtDescripcion)
+                CampoError.limpiar(txtPrecio)
+                CampoError.limpiar(txtCantidad)
+
                 val descripcion = txtDescripcion.text.toString().trim()
                 val precio = txtPrecio.text.toString().toBigDecimalOrNull()
                 val cantidad = txtCantidad.text.toString().toIntOrNull()
 
-                if (descripcion.isBlank() || precio == null || precio <= BigDecimal.ZERO || cantidad == null || cantidad <= 0) {
-                    Toast.makeText(this, "Revisa descripción, precio y cantidad", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
+               var valido = true
+
+                if(descripcion.isBlank()){
+                    CampoError.mostrar(txtDescripcion, "INGRESA LA DESCRIPCION")
+                    valido = false
                 }
 
+                if (precio == null || precio <= BigDecimal.ZERO) {
+                    CampoError.mostrar(txtPrecio, "INGRESA UN PRECIO VÁLIDO")
+                    valido = false
+                }
+
+                if(precio == null || cantidad == null || cantidad <= 0) {
+                    CampoError.mostrar(txtCantidad, "INGRESA UNA CANTIDAD VALIDA")
+                    valido = false
+                }
+                if (!valido || precio == null || cantidad == null) return@setOnClickListener
+
+
                 if (existente != null) {
+                    val precioMostrado = existente.precioUnitario.setScale(2, java.math.RoundingMode.HALF_UP)
+                    if (precio.compareTo(precioMostrado) != 0) {
+                        // el usuario cambió el precio: pasa a ser el nuevo precio de origen
+                        existente.precioBase = precio
+                        existente.monedaBase = CotizacionEnCurso.codMoneda
+                        existente.precioUnitario = precio
+                    }
                     existente.descripcion = descripcion
-                    existente.precioUnitario = precio
                     existente.cantidad = cantidad
                 } else {
                     val yaExiste = seleccionados.find { it.producto.codProducto == producto.codProducto }
@@ -300,23 +332,32 @@ class AgregarProductosActivity : AppCompatActivity() {
                         yaExiste.cantidad += cantidad
                     } else {
                         seleccionados.add(
-                            ProductoSeleccionado(producto, cantidad, descripcion, precio)
+                            ProductoSeleccionado(producto, cantidad, descripcion, precio,
+                                monedaBase = CotizacionEnCurso.codMoneda)
                         )
                     }
                 }
                 actualizarSeleccionados()
+                dialog.dismiss()
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
-    }
+
+            }
+        dialog.show()
+        }
+
+
 
     private fun actualizarSeleccionados() {
+        if (seleccionados.isNotEmpty()) CampoError.limpiar(findViewById<View>(R.id.txtBuscarProducto))
+
         CotizacionEnCurso.productos.clear()
         CotizacionEnCurso.productos.addAll(seleccionados)
 
         adapterSeleccionados.actualizarLista(seleccionados.toList())
 
-        val total = seleccionados.fold(BigDecimal.ZERO) { acc, item -> acc.add(item.subtotal) }
+        val total = seleccionados.fold(BigDecimal.ZERO) { acc, item -> acc.add(item.subtotal)
+            .setScale(2, java.math.RoundingMode.HALF_UP)
+        }
         val divisor = BigDecimal.ONE.add(igvPorcentaje)
         val subtotal = if (divisor > BigDecimal.ZERO) {
             total.divide(

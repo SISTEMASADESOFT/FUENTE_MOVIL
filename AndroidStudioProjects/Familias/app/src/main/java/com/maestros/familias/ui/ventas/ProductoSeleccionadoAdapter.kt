@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maestros.familias.R
 import com.maestros.familias.data.model.ProductoSeleccionado
 import com.maestros.familias.data.util.MonedaHelper
+import java.math.RoundingMode
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -41,8 +42,11 @@ class ProductoSeleccionadoAdapter(
         val sel = items[position]
         holder.txtDesc.text = sel.descripcion
         holder.txtCant.text = sel.cantidad.toString()
-        holder.txtPUnit.text = MonedaHelper.formatear(sel.precioUnitario, codMoneda)
-        holder.txtSubtotal.text = MonedaHelper.formatear(sel.subtotal, codMoneda)
+        holder.txtPUnit.text = sel.precioUnitario.setScale(2, RoundingMode.HALF_UP)
+            .toPlainString()
+        holder.txtSubtotal.text = sel.subtotal
+            .setScale(2, RoundingMode.HALF_UP)
+            .toPlainString()
         holder.itemView.setOnClickListener { onEditar(sel) }
 
         if(soloLectura){

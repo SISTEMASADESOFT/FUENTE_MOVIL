@@ -8,5 +8,6 @@ data class Cliente(
     val codDepartamento: String = "0",
     val codProvincia: String = "0",
     val codDistrito: String = "0",
-    val codDireccion: String = "0"
+    val codDireccion: String = "0",
+    val distrito: String = ""
 )

@@ -134,6 +134,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp" />
+
+                <include
+                    layout="@layout/item_dato_cliente"
+                    android:id="@+id/rowVencimientoConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
 
             <!-- Detalle de productos -->
@@ -294,6 +301,36 @@
                     android:text="Contado"
                     android:textColor="@color/fam_ink" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- Nro. de operación (solo factura con condición de pago 6) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNroOperacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Nro. de operación"
+                android:visibility="gone"
+                app:boxStrokeColor="@color/fam_gold"
+                app:hintTextColor="@color/fam_gold"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNroOperacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:textColor="@color/fam_ink" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <include
+                android:id="@+id/layoutGuia"
+                layout="@layout/layout_guia_remision"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="gone" />
 
             <!-- Botones -->
             <LinearLayout
